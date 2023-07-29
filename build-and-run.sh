@@ -5,4 +5,4 @@ cmake ..
 make
 
 ./Program2/Program2
-./Program1/Program1
+./Program1/Program1 -k KEYKEYKEY -m "Message to encrypt"
