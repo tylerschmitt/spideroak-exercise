@@ -7,5 +7,9 @@ add_subdirectory(Program1)
 add_subdirectory(Program2)
 
 add_subdirectory(extern/cxxopts)
+
 target_include_directories(Program1 PUBLIC cxxopts)
 target_link_libraries(Program1 PUBLIC cxxopts)
+
+target_include_directories(Program2 PUBLIC cxxopts)
+target_link_libraries(Program2 PUBLIC cxxopts)
