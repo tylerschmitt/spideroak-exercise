@@ -7,3 +7,9 @@
 [submodule "thirdparty/googletest"]
 	path = thirdparty/googletest
 	url = git@github.com:google/googletest.git
+[submodule "thirdparty/easy-socket"]
+	path = thirdparty/easy-socket
+	url = git@github.com:masesk/easy-socket.git
+[submodule "thirdparty/cxxopts"]
+	path = thirdparty/cxxopts
+	url = git@github.com:jarro2783/cxxopts.git
