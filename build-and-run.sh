@@ -4,5 +4,7 @@ mkdir build && cd build
 cmake ..
 make
 
-# ./Program2/Program2 -k "KEYKEYKEY"
-# ./Program1/Program1 -k "KEYKEYKEY" -m "Message to encrypt"
+./Program2/Program2 -k "ABCD1234ABCD1234ABCD1234ABCD1234"
+./Program1/Program1 -k "ABCD1234ABCD1234ABCD1234ABCD1234" -m "Message to encrypt"
+
+exit 0

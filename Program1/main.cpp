@@ -52,11 +52,10 @@ int main(int argc, char *argv[]) {
 
         std::string ciphertext_str(reinterpret_cast<char const*>(ciphertext), ciphertext_len);
 
-
         masesk::EasySocket socketManager;
-        socketManager.socketConnect("test", "127.0.0.1", 8080);
-        socketManager.socketSend("test", ciphertext_str);
-        socketManager.closeConnection("test");
+        socketManager.socketConnect("spideroak_exercise", "127.0.0.1", 8080);
+        socketManager.socketSend("spideroak_exercise", ciphertext_str);
+        socketManager.closeConnection("spideroak_exercise");
 
         return 0;
     } else {
