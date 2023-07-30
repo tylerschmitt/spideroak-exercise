@@ -42,15 +42,19 @@ int main(int argc, char *argv[]) {
 
     if (key_and_plaintext.key.has_value() && key_and_plaintext.plaintext.has_value()) {
 
-        const auto ciphertext_str = spideroak_crypto::encrypt(
+        const auto ciphertext_packet = spideroak_crypto::encrypt(
             (unsigned char *)key_and_plaintext.key.value().c_str(),
             (unsigned char *)key_and_plaintext.plaintext.value().c_str(),
             key_and_plaintext.plaintext.value().size());
 
-        masesk::EasySocket socketManager;
-        socketManager.socketConnect("spideroak_exercise", "127.0.0.1", 8080);
-        socketManager.socketSend("spideroak_exercise", ciphertext_str);
-        socketManager.closeConnection("spideroak_exercise");
+        if (ciphertext_packet.success && ciphertext_packet.crypto_str.has_value()) {
+            masesk::EasySocket socketManager;
+            socketManager.socketConnect("spideroak_exercise", "127.0.0.1", 8080);
+            socketManager.socketSend("spideroak_exercise", ciphertext_packet.crypto_str.value());
+            socketManager.closeConnection("spideroak_exercise");
+        } else {
+            std::cout << "Encryption failed!" << std::endl;;
+        }
 
         return 0;
     } else {

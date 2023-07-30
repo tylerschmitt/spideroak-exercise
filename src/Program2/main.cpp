@@ -29,11 +29,15 @@ std::optional<std::string> ParseArgs(int argc, char *argv[]) {
 void handleData(const std::string &data) {
 
     unsigned char plaintext[128];
-    const auto plaintext_str = spideroak_crypto::decrypt((unsigned char *)data.c_str(),
+    const auto plaintext_packet = spideroak_crypto::decrypt((unsigned char *)data.c_str(),
         data.size(),
         key);
 
-    std::cout << "Successful! Decrypted the following message:\n\n" << plaintext_str << std::endl;
+    if (plaintext_packet.success && plaintext_packet.crypto_str.has_value()) {
+        std::cout << "Successful! Decrypted the following message:\n\n" << plaintext_packet.crypto_str.value() << std::endl;
+    } else {
+        std::cout << "Decryption failed! Perhaps it is the wrong key? " << key << std::endl;
+    }
 }
 
 int main(int argc, char *argv[]) {
