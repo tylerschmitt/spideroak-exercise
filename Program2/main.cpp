@@ -29,12 +29,9 @@ std::optional<std::string> ParseArgs(int argc, char *argv[]) {
 void handleData(const std::string &data) {
 
     unsigned char plaintext[128];
-    const auto plaintext_len = spideroak_crypto::decrypt((unsigned char *)data.c_str(),
+    const auto plaintext_str = spideroak_crypto::decrypt((unsigned char *)data.c_str(),
         data.size(),
-        key,
-        plaintext);
-
-    std::string plaintext_str(reinterpret_cast<char const*>(plaintext), plaintext_len);
+        key);
 
     std::cout << "Successful! Decrypted the following message:\n\n" << plaintext_str << std::endl;
 }
@@ -47,7 +44,7 @@ int main(int argc, char *argv[]) {
         key = (unsigned char *)key_arg.value().c_str();
 
         masesk::EasySocket socketManager;
-        socketManager.socketListen("test", 8080, &handleData);
+        socketManager.socketListen("spideroak_exercise", 8080, &handleData);
         return 0;
     } else {
         std::cerr << "Invalid arguments." << std::endl;

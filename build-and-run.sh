@@ -10,11 +10,11 @@ cd build
 cmake ..
 make
 
-./Program2/Program2 -k "ABCD1234ABCD1234ABCD1234ABCD1234" &
+./Program2/Program2 -k "40baaed112a2fdc0934055fd625f906a4a21a07c6aaf45de691b4f6962f10b88" &
 
 sleep 1
 
-./Program1/Program1 -k "ABCD1234ABCD1234ABCD1234ABCD1234" -m "Message to encrypt"
+./Program1/Program1 -k "40baaed112a2fdc0934055fd625f906a4a21a07c6aaf45de691b4f6962f10b88" -m "Message to encrypt"
 
 sleep 1
 

@@ -12,8 +12,9 @@ namespace spideroak_crypto {
         abort();
     }
 
-    int encrypt(unsigned char * key, unsigned char * plaintext, size_t plaintext_len, unsigned char *ciphertext)
+    std::string encrypt(unsigned char *key, unsigned char *plaintext, size_t plaintext_len)
     {
+        unsigned char ciphertext[128];
         unsigned char *iv = (unsigned char *)"0123456789012345";
 
         EVP_CIPHER_CTX *ctx;
@@ -55,11 +56,12 @@ namespace spideroak_crypto {
         /* Clean up */
         EVP_CIPHER_CTX_free(ctx);
 
-        return ciphertext_len;
+        return std::string(reinterpret_cast<char const*>(ciphertext), ciphertext_len);
     }
 
-    int decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key, unsigned char *plaintext)
+    std::string decrypt(unsigned char *ciphertext, int ciphertext_len, unsigned char *key)
     {
+        unsigned char plaintext[128];
         unsigned char *iv = (unsigned char *)"0123456789012345";
 
         EVP_CIPHER_CTX *ctx;
@@ -101,7 +103,7 @@ namespace spideroak_crypto {
         /* Clean up */
         EVP_CIPHER_CTX_free(ctx);
 
-        return plaintext_len;
+        return std::string(reinterpret_cast<char const*>(plaintext), plaintext_len);
     }
 
 }

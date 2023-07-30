@@ -42,15 +42,10 @@ int main(int argc, char *argv[]) {
 
     if (key_and_plaintext.key.has_value() && key_and_plaintext.plaintext.has_value()) {
 
-        unsigned char ciphertext[128];
-
-        const auto ciphertext_len = spideroak_crypto::encrypt(
+        const auto ciphertext_str = spideroak_crypto::encrypt(
             (unsigned char *)key_and_plaintext.key.value().c_str(),
             (unsigned char *)key_and_plaintext.plaintext.value().c_str(),
-            key_and_plaintext.plaintext.value().size(),
-            ciphertext);
-
-        std::string ciphertext_str(reinterpret_cast<char const*>(ciphertext), ciphertext_len);
+            key_and_plaintext.plaintext.value().size());
 
         masesk::EasySocket socketManager;
         socketManager.socketConnect("spideroak_exercise", "127.0.0.1", 8080);
