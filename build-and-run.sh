@@ -14,11 +14,11 @@ make
 
 echo "Running example..."
 
-./Program2/Program2 -k "40baaed112a2fdc0934055fd625f906a4a21a07c6aaf45de691b4f6962f10b88" &
+./src/Program2/Program2 -k "40baaed112a2fdc0934055fd625f906a4a21a07c6aaf45de691b4f6962f10b88" &
 
 sleep 1
 
-./Program1/Program1 -k "40baaed112a2fdc0934055fd625f906a4a21a07c6aaf45de691b4f6962f10b88" -m "Message to encrypt"
+./src/Program1/Program1 -k "40baaed112a2fdc0934055fd625f906a4a21a07c6aaf45de691b4f6962f10b88" -m "Message to encrypt"
 
 sleep 1
 
