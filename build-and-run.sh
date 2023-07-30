@@ -1,4 +1,7 @@
 #!/bin/bash
+
+git submodule update --init --recursive
+
 if [ $# -gt 0 ] && [ $1 -eq 1 ]
 then
     echo "\nClearing build directory..."
