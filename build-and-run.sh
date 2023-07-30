@@ -3,8 +3,13 @@ if [ $# -gt 0 ] && [ $1 -eq 1 ]
 then
     echo "\nClearing build directory..."
     rm -rf build
+fi
+
+if [ ! -d "/path/to/dir" ]
+then 
     mkdir build
 fi
+
 
 echo "\nBuilding..."
 cd build
