@@ -8,12 +8,19 @@ add_subdirectory(Program1)
 add_subdirectory(Program2)
 
 add_subdirectory(extern/cxxopts)
+add_subdirectory(extern/easy-socket)
 
 target_include_directories(Program1 PUBLIC cxxopts)
 target_link_libraries(Program1 PUBLIC cxxopts)
 
+target_include_directories(Program1 PUBLIC easy-socket)
+target_link_libraries(Program1 PUBLIC easy-socket)
+
 target_include_directories(Program2 PUBLIC cxxopts)
 target_link_libraries(Program2 PUBLIC cxxopts)
+
+target_include_directories(Program2 PUBLIC easy-socket)
+target_link_libraries(Program2 PUBLIC easy-socket)
 
 target_include_directories(Program1 PUBLIC crypto)
 target_include_directories(Program2 PUBLIC crypto)

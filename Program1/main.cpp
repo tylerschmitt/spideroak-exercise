@@ -1,6 +1,7 @@
 #include <cxxopts.hpp>
 #include <iostream>
 #include <optional>
+#include <masesk/EasySocket.hpp>
 #include "crypto.hpp"
 
 
@@ -48,6 +49,14 @@ int main(int argc, char *argv[]) {
             (unsigned char *)key_and_plaintext.plaintext.value().c_str(),
             key_and_plaintext.plaintext.value().size(),
             ciphertext);
+
+        std::string ciphertext_str(reinterpret_cast<char const*>(ciphertext), ciphertext_len);
+
+
+        masesk::EasySocket socketManager;
+        socketManager.socketConnect("test", "127.0.0.1", 8080);
+        socketManager.socketSend("test", ciphertext_str);
+        socketManager.closeConnection("test");
 
         return 0;
     } else {

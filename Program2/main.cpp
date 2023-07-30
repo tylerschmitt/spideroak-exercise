@@ -1,6 +1,10 @@
 #include <iostream>
 #include <cxxopts.hpp>
 #include <optional>
+#include <masesk/EasySocket.hpp>
+#include "crypto.hpp"
+
+unsigned char *key;
 
 std::optional<std::string> ParseArgs(int argc, char *argv[]) {
     cxxopts::Options options("Program1", "Encrypt and send message to Program2.");
@@ -22,11 +26,28 @@ std::optional<std::string> ParseArgs(int argc, char *argv[]) {
     return key;
 }
 
-int main(int argc, char *argv[]) {
-    const auto key = ParseArgs(argc, argv);
+void handleData(const std::string &data) {
 
-    if (key.has_value()) {
-        std::cout << key.value() << std::endl;
+    unsigned char plaintext[128];
+    const auto plaintext_len = spideroak_crypto::decrypt((unsigned char *)data.c_str(),
+        data.size(),
+        key,
+        plaintext);
+
+    std::string plaintext_str(reinterpret_cast<char const*>(plaintext), plaintext_len);
+
+    std::cout << "Successful! Decrypted the following message:\n\n" << plaintext_str << std::endl;
+}
+
+int main(int argc, char *argv[]) {
+    const auto key_arg = ParseArgs(argc, argv);
+
+    if (key_arg.has_value()) {
+
+        key = (unsigned char *)key_arg.value().c_str();
+
+        masesk::EasySocket socketManager;
+        socketManager.socketListen("test", 8080, &handleData);
         return 0;
     } else {
         std::cerr << "Invalid arguments." << std::endl;
